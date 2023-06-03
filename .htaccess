@@ -1,0 +1,8 @@
+RewriteEngine On
+
+# Redirect to index.php if no parameter is present
+RewriteCond %{QUERY_STRING} ^$
+RewriteRule ^$ index.php [L]
+
+# Rewrite any alphanumeric parameter to url.php
+RewriteRule ^([a-zA-Z0-9]+)$ url.php?id=$1 [L]

@@ -1,0 +1,1 @@
+INSERT INTO `url` (`id`, `userID`, `shortUrl`, `originUrl`) VALUES (NULL, '1', 'bagus', 'bagus');

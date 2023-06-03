@@ -1,0 +1,1 @@
+UPDATE `url` SET `originUrl` = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' WHERE `url`.`id` = 1;
