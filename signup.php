@@ -72,46 +72,37 @@
 
         <div class="card bg-glass">
           <div class="card-body px-4 py-5 px-md-5">
-            <form>
-              <!-- 2 column grid layout with text inputs for the first and last names -->
-              <div class="row">
-                <div class="col-md-6 mb-4">
-                  <div class="form-outline">
-                    <input type="text" id="form3Example1" class="form-control" />
-                    <label class="form-label" for="form3Example1">First name</label>
-                  </div>
-                </div>
-                <div class="col-md-6 mb-4">
-                  <div class="form-outline">
-                    <input type="text" id="form3Example2" class="form-control" />
-                    <label class="form-label" for="form3Example2">Last name</label>
-                  </div>
-                </div>
-              </div>
+          <form action="auth/register" method="POST">
 
-              <!-- Email input -->
-              <div class="form-outline mb-4">
-                <input type="email" id="form3Example3" class="form-control" />
-                <label class="form-label" for="form3Example3">Email address</label>
-              </div>
+<div class="form-outline mb-4">
+  <input type="text" id="fullname" name="fullname" class="form-control" />
+  <label class="form-label" for="fullname">Fullname</label>
+</div>
 
-              <!-- Password input -->
-              <div class="form-outline mb-4">
-                <input type="password" id="form3Example4" class="form-control" />
-                <label class="form-label" for="form3Example4">Password</label>
-              </div>
+<!-- Email input -->
+<div class="form-outline mb-4">
+  <input type="email" id="email" name="email" class="form-control" />
+  <label class="form-label" for="email">Email address</label>
+</div>
 
-              <div class="form-outline mb-4">
-                <input type="password" id="form3Example4" class="form-control" />
-                <label class="form-label" for="form3Example4">Confirm Password</label>
-              </div>
+<!-- Password input -->
+<div class="form-outline mb-4">
+  <input type="password" id="password" name="password" class="form-control" />
+  <label class="form-label" for="password">Password</label>
+</div>
 
-              <!-- Submit button -->
-              <button type="submit" class="btn btn-primary btn-block mb-4">
-                Sign up
-              </button>
-            
-            </form>
+<div class="form-outline mb-4">
+  <input type="password" id="confirm_password" name="confirm_password" class="form-control" />
+  <label class="form-label" for="confirm_password">Confirm Password</label>
+</div>
+
+<!-- Submit button -->
+<button type="submit" class="btn btn-primary btn-block mb-4">
+  Sign up
+</button>
+
+</form>
+
             already have akcount ? <a href="/eslolin">sign in</a>
           </div>
         </div>

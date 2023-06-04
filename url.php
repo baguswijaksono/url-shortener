@@ -4,11 +4,7 @@ $content = getContentById($id);
 function getContentById($id) {
     return $id;
 }
-$hostname = 'localhost';
-$username = 'root';
-$password = '';
-$database = 'bgs';
-$conn = mysqli_connect($hostname, $username, $password, $database);
+require_once 'config.php';
 if (!$conn) {
     die("Koneksi ke database gagal: " . mysqli_connect_error());
 }
@@ -47,9 +43,7 @@ if (!empty($originUrl)) {
                 <a href='/eslolin'>Back to homepage</a>
             </div>
         </div>
-    
     </body>
-    
     </html>
     ";
 }

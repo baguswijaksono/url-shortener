@@ -73,28 +73,26 @@
 
         <div class="card bg-glass">
           <div class="card-body px-4 py-5 px-md-5">
-            <form>
-         
-              <!-- Email input -->
-              <div class="form-outline mb-4">
-                <input type="email" id="form3Example3" class="form-control" />
-                <label class="form-label" for="form3Example3">Email address</label>
-              </div>
+          <form action="auth/validate" method="POST">
+    <!-- Email input -->
+    <div class="form-outline mb-4">
+        <input type="email" id="form3Example3" class="form-control" name="email" />
+        <label class="form-label" for="form3Example3">Email address</label>
+    </div>
 
-              <!-- Password input -->
-              <div class="form-outline mb-4">
-                <input type="password" id="form3Example4" class="form-control" />
-                <label class="form-label" for="form3Example4">Password</label>
-              </div>
+    <!-- Password input -->
+    <div class="form-outline mb-4">
+        <input type="password" id="form3Example4" class="form-control" name="password" />
+        <label class="form-label" for="form3Example4">Password</label>
+    </div>
+
+    <!-- Submit button -->
+    <button type="submit" class="btn btn-primary btn-block mb-4">
+        Sign in
+    </button>
+</form>
 
 
-              <!-- Submit button -->
-              <button type="submit" class="btn btn-primary btn-block mb-4">
-                Sign in
-              </button>
-
-            
-            </form>
             doest have akcount ? <a href="signup.php">make one</a>
           </div>
           

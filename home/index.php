@@ -1,3 +1,11 @@
+<?php
+session_start();
+require '../config.php';
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+if (isset($_SESSION['email'])) {
+  ?>  
 <!doctype html>
 <html lang="en">
   <head>
@@ -30,10 +38,16 @@
     <div class="">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            <h5>Url Shortener</h5>
+            <h6> Hello ,<?php 
+            $userdetails = "SELECT * FROM `users` WHERE `email` LIKE '" . $_SESSION['email'] . "'";
+            $details = $conn->query($userdetails);
+                while ($user = $details->fetch_assoc()) {
+                  echo $user["username"];
+              }
+            ?> </h6>
         </ul>
 
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Add New Shortlink
 </button>
         <div class="isi" style="padding-right: 12px;"></div>
@@ -46,22 +60,14 @@
             <li><a class="dropdown-item" href="#">Settings</a></li>
             <li><a class="dropdown-item" href="#">Profile</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Sign out</a></li>
+            <li><a class="dropdown-item" href="logout.php">Sign out</a></li>
           </ul>
         </div>
       </div>
     </div>
   </header>
   <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "bgs";
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-$sql = "SELECT id, userID, shortUrl, originUrl FROM url";
+$sql = "SELECT id, shortUrl, originUrl FROM url WHERE email = '" . $_SESSION['email'] . "'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     echo "  <table class='table'>
@@ -88,7 +94,7 @@ if ($result->num_rows > 0) {
     
     echo "  </tbody> </table>";
 } else {
-    echo "No data found in the bgs table.";
+    echo "<center>you haven't make any shortlink</center> ";
 }
 
 // Close the database connection
@@ -113,8 +119,6 @@ $conn->close();
         <label for="inputPassword5" class="form-label">Original Link</label>
         <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
 
-
-
       </div>
       
       <div class="modal-footer">
@@ -138,8 +142,55 @@ function copyToClipboard(url) {
     document.body.removeChild(tempInput);
     alert("URL copied to clipboard: " + url);
 }
-</script>
 
+function update(button, status) {
+  var sensorId = button.getAttribute('data-sensor-id');
+  
+  $.ajax({
+    url: 'update_status.php',
+    type: 'POST',
+    data: { sensorId: sensorId, status: status },
+    success: function(response) {
+      $('#status-' + sensorId).text("Status: " + (status == 1 ? "On" : "Off"));
+    },
+    error: function(xhr, status, error) {
+      console.error(error);
+    }
+  });
+}
+
+function add(button, status) {
+  var sensorId = button.getAttribute('data-sensor-id');
+  
+  $.ajax({
+    url: 'update_status.php',
+    type: 'POST',
+    data: { sensorId: sensorId, status: status },
+    success: function(response) {
+      $('#status-' + sensorId).text("Status: " + (status == 1 ? "On" : "Off"));
+    },
+    error: function(xhr, status, error) {
+      console.error(error);
+    }
+  });
+}
+
+function delete(button, status) {
+  var sensorId = button.getAttribute('data-sensor-id');
+  
+  $.ajax({
+    url: 'update_status.php',
+    type: 'POST',
+    data: { sensorId: sensorId, status: status },
+    success: function(response) {
+      $('#status-' + sensorId).text("Status: " + (status == 1 ? "On" : "Off"));
+    },
+    error: function(xhr, status, error) {
+      console.error(error);
+    }
+  });
+}
+</script>
     <script src="/docs/5.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
       
@@ -147,4 +198,16 @@ function copyToClipboard(url) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
   </body>
 </html>
+
+
+<?php
+} 
+else {
+    // Session does not exist, redirect to a login page or display an error message
+    // Example: Redirect to the login page
+    header("Location: ../");
+    exit();
+}
+?>
+
 
